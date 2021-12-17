@@ -8,7 +8,63 @@
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
-    
+    <header>
+        <div class="wrapper">
+            <h1>Dont knwo what to cook tonight? We got'chu</h1>
+            <div class="forms">
+                <form action="">
+                    
+                    <label for="dishName" class="visuallyHidden">Dish name</label>
+                    <input type="text" placeholder="Enter Dish Name here" id="dishName">
+                
+                    <label for="catagories" class="visuallyHidden">Choose from catagory</label>
+                    <select name="" id="catagories">
+                        <!-- drop down contents in <option> goes here -->
+                    </select>
+
+                    <button type="submit">Show me how to cook it</button>
+
+                    <h2>Or let internet decide</h2>
+
+                    <button id="randomButton">Choose For Me!</button>
+                </form>
+
+            </div>
+            <!-- div .forms ends -->
+        </div>
+        <!-- .wrapper for header ends -->
+    </header>
+
+
+
+
+
+    <!-- ==========================
+      returned data display section 
+    ===============================-->
+    <section class="returnedDataDisplay">
+        <div class="wrapper">
+        <div class="dishOptions">
+            <ul>
+                <!-- list of returned dishes from user dropdown choice is populated here -->
+            </ul>
+        </div>
+        
+        <div class="dishImg">
+            <!-- dish image is populated here for user chosen dish -->
+        </div>
+
+        <div class="instruction">
+            <!-- cooking instruction will be populated here for user chosen dish -->
+        </div>
+
+        <div class="ingredientsList">
+            <!-- ingredients needed will be populated here for user chosen dish -->
+        </div>
+        </div>
+        <!-- .wrapper for body ends -->
+    </section>
+
 
     <script src="script.js"></script>
 </body>
