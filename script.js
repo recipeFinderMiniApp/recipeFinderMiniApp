@@ -86,7 +86,7 @@ recipeApp.displayCategories = (event) => {
 
     event.forEach((listItem) => {
         const liElement = document.createElement('li');
-        liElement.innerHTML = `<a>${listItem.strMeal}</a>`
+        liElement.innerHTML = `${listItem.strMeal}`
 
         options.append(liElement);
     });
@@ -125,8 +125,8 @@ recipeApp.userRecipe = () => {
 
 // Create a function to update the user's input based on the user's choice when the user chooses a dish by selecting from the list returned from the category
 recipeApp.categoryRecipe = () => {
-    const aElement = document.querySelectorAll('a')
-    // console.log(liElement);
+    const aElement = document.querySelector('li')
+    console.log(aElement);
 
     aElement.addEventListener('click', function (event) {
         event.preventDefault();
@@ -173,10 +173,11 @@ recipeApp.displayRecipe = (event) => {
         divElement.innerHTML = `
             <h2>${recipe.strMeal}</h2>
             <img src="${recipe.strMealThumb}" alt="">
-            <p>${recipe.strInstructions}</p>`
-            // <ul>
-            //     <li>${recipe.ingredient}</li>
-            // </ul>`
+            <p>${recipe.strInstructions}</p>
+            <ul>
+                <li>${recipe.ingredient1}</li>
+                
+            </ul>`
         recipeResult.append(divElement);
     })
 }
