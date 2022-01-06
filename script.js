@@ -68,8 +68,8 @@ recipeApp.getCategories = () => {
 
             // ---------------------------------------------------------------------------
 
-            .then(() => {
-                recipeApp.categoryRecipe();
+            .then((e) => {
+                recipeApp.categoryRecipe(e);
             })
     });
 }
@@ -101,10 +101,12 @@ recipeApp.userRecipe = () => {
 
     dishButton.addEventListener('click', function (event) {
         event.preventDefault();
+        const ulElement = document.querySelector('ul')
+        ulElement.innerHTML = "";
 
         const inputElement = document.querySelector(`input[type="text"]`)
         const userInput = inputElement.value
-        console.log(userInput);
+        // console.log(userInput);
 
         const searchUrl = new URL(recipeApp.apiSearchUrl);
         searchUrl.search = new URLSearchParams({
@@ -118,6 +120,8 @@ recipeApp.userRecipe = () => {
             .then((jsonResult) => {
                 recipeApp.displayRecipe(jsonResult.meals);
             });
+        // create an if statement to do nothing if the user hasn't inputted anything
+
     })
 }
 
@@ -125,40 +129,43 @@ recipeApp.userRecipe = () => {
 
 // Create a function to update the user's input based on the user's choice when the user chooses a dish by selecting from the list returned from the category
 recipeApp.categoryRecipe = () => {
-    const aElement = document.querySelector('li')
-    console.log(aElement);
+    const aElement = document.querySelectorAll('li')
+    // console.log(aElement);
 
-    aElement.addEventListener('click', function (event) {
-        event.preventDefault();
-        
+    aElement.forEach( (e) => {
+        e.addEventListener('click', function (event) {
+            event.preventDefault();
 
-        const userInput = aElement.textContent;
-        // console.log(userInput);
 
-        const searchUrl = new URL(recipeApp.apiSearchUrl);
-        searchUrl.search = new URLSearchParams({
-            s: `${userInput}`
-        });
-        console.log(searchUrl);
+            const userInput = e.textContent;
+            console.log(userInput);
 
-        fetch(searchUrl)
-            .then((response) => {
-                return response.json();
-            })
-            .then((jsonResult) => {
-                // console.log(jsonResult.meals);
-                recipeApp.displayRecipe(jsonResult.meals);
+            const searchUrl = new URL(recipeApp.apiSearchUrl);
+            searchUrl.search = new URLSearchParams({
+                s: `${userInput}`
             });
+            // console.log(searchUrl);
 
-        const ulElement = document.querySelector('ul')
-        ulElement.innerHTML = "";
+            fetch(searchUrl)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((jsonResult) => {
+                    // console.log(jsonResult.meals);
+                    recipeApp.displayRecipe(jsonResult.meals);
+                });
+
+            const ulElement = document.querySelector('ul')
+            ulElement.innerHTML = "";
+        })
     })
+
+    
     
 }
 
 
-// not sure where to place this function to let it run on every li that is displayed
-// recipeApp.categoryRecipe();
+// create a function to fetch data for the random dish button
 
 
 
@@ -169,15 +176,18 @@ recipeApp.displayRecipe = (event) => {
     // const ingredientsList = document.querySelector('.ingredientsList')
 
     event.forEach((recipe) => {
+        const resultsClass = document.querySelector('#results')
+        resultsClass.innerHTML = "";
+        
         const divElement = document.createElement('div');
         divElement.innerHTML = `
             <h2>${recipe.strMeal}</h2>
             <img src="${recipe.strMealThumb}" alt="">
-            <p>${recipe.strInstructions}</p>
-            <ul>
-                <li>${recipe.ingredient1}</li>
+            <p>${recipe.strInstructions}</p>`
+            // <ul>
+            //     <li>${recipe.ingredient1}</li>
                 
-            </ul>`
+            // </ul>
         recipeResult.append(divElement);
     })
 }
