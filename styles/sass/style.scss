@@ -1,5 +1,7 @@
-body {
-    background-color: red;
-}
 
-@import "partials/generalStyles"
+
+
+@import "partials/normalize";
+@import "partials/colors";
+@import "partials/fontStyling";
+@import "partials/generalStyling";

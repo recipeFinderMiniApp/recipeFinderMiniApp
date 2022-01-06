@@ -1,32 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Finder</title>
-    <link rel="stylesheet" href="./styles/style.css">
+
+    <!-- link to google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Yellowtail&display=swap" rel="stylesheet">
+
+    <!-- link to fontawesome -->
+    <i class="fas fa-sort-down"></i>
+
+    <link rel="stylesheet" href="./styles/sass/style.css">
 </head>
+
 <body>
     <header>
         <div class="wrapper">
-            <h1>Dont knwo what to cook tonight? We got'chu</h1>
+
+            <h1>Don't know what to <span>cook</span> tonight? <br> <span>We got'chu</span></h1>
             <div class="forms">
                 <form action="">
                     
-                    <label for="dishName" class="visuallyHidden">Dish name</label>
-                    <input type="text" placeholder="Enter Dish Name here" id="dishName">
-                
-                    <label for="catagories" class="visuallyHidden">Choose from catagory</label>
-                    <select name="" id="catagories">
-                        <!-- drop down contents in <option> goes here -->
-                    </select>
+                    <div class="searchByName">
+                        <label for="Seach Recipes by dish name" class="visuallyHidden">Seach Recipes by dish name</label>
+                        <input type="text" placeholder="Enter Dish Name here" id="dishName">
+                    </div>
 
-                    <button type="submit">Show me how to cook it</button>
+                    <button type="submit" id="dishButton">Show me how to cook it !</button>
 
-                    <h2>Or let internet decide</h2>
+                    <div class="searchByCategory">
+                        <label for="categories" class="visuallyHidden">Choose from category</label>
+                        <select name="" id="categories">
+                            <!-- drop down contents in <option> goes here -->
+                        </select>
+                    </div>
 
-                    <button id="randomButton">Choose For Me!</button>
+
+                    <button type="submit" id="categoryButton">Show me what to cook !</button>
+                    
+                    <div class="greyLineContainer">
+                        <p class="greyLine">OR</p>
+                    </div>
+
+                    <button id="randomButton">Show me a random dish !</button>
                 </form>
 
             </div>
@@ -36,32 +57,20 @@
     </header>
 
 
-
-
     <!-- ==========================
       returned data display section 
     ===============================-->
     <section class="returnedDataDisplay">
         <div class="wrapper">
-            <div class="dishOptions">
-                <ul>
+
+            <div>
+                <ul class="dishOptions">
                     <!-- list of returned dishes from user dropdown choice is populated here -->
                 </ul>
             </div>
-            
 
-            <div class="dishImg">
-                <!-- dish image is populated here for user chosen dish -->
-            </div>
+            <div id="results">
 
-
-            <div class="instruction">
-                <!-- cooking instruction will be populated here for user chosen dish -->
-            </div>
-
-            
-            <div class="ingredientsList">
-                <!-- ingredients needed will be populated here for user chosen dish -->
             </div>
 
             
@@ -72,4 +81,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
