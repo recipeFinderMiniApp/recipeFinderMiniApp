@@ -1,0 +1,38 @@
+h1{
+    font-family: 'Yellowtail', cursive;
+    letter-spacing: .1em;
+    text-align: center;
+
+    span{
+        text-decoration: underline;
+    }
+
+    & span:last-child{
+        font-family: 'Permanent Marker', cursive;
+        font-size: 2em;
+    }
+}
+
+
+.forms,
+li,
+p{
+    font-family: "gadugi", sans-serif;
+    font-size: 1em;
+}
+
+
+p{
+    color:$darkGrey;
+}
+
+
+// Two buttons for "show me how to cook it" and "Show me a random dish"
+button{
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.3em;
+}
+
+
+
+
