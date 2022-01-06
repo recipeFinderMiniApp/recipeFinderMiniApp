@@ -64,7 +64,13 @@ recipeApp.getCategories = () => {
             })
             .then((jsonResult) => {
                 recipeApp.displayCategories(jsonResult.meals);
-            });
+            })
+
+            // ---------------------------------------------------------------------------
+
+            .then(() => {
+                recipeApp.categoryRecipe();
+            })
     });
 }
 
@@ -89,14 +95,91 @@ recipeApp.displayCategories = (event) => {
 
 
 
+// Create a function to update the variable (userInput) based on user choice and input when the user chooses a dish by name
+recipeApp.userRecipe = () => {
+    const dishButton = document.querySelector('#dishButton')
+
+    dishButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        const inputElement = document.querySelector(`input[type="text"]`)
+        const userInput = inputElement.value
+        console.log(userInput);
+
+        const searchUrl = new URL(recipeApp.apiSearchUrl);
+        searchUrl.search = new URLSearchParams({
+            s: `${userInput}`
+        });
+
+        fetch(searchUrl)
+            .then((response) => {
+                return response.json();
+            })
+            .then((jsonResult) => {
+                recipeApp.displayRecipe(jsonResult.meals);
+            });
+    })
+}
 
 
 
-// Create a function (getUserInput) to update the variable (userInput) based on user choice and input
+// Create a function to update the user's input based on the user's choice when the user chooses a dish by selecting from the list returned from the category
+recipeApp.categoryRecipe = () => {
+    const aElement = document.querySelectorAll('a')
+    // console.log(liElement);
 
-// create fucntion to form fetch request with userInput variables.
+    aElement.addEventListener('click', function (event) {
+        event.preventDefault();
+        
 
-// create a function to append fatched json data. (append to li that will reflect on DOM)
+        const userInput = aElement.textContent;
+        // console.log(userInput);
+
+        const searchUrl = new URL(recipeApp.apiSearchUrl);
+        searchUrl.search = new URLSearchParams({
+            s: `${userInput}`
+        });
+        console.log(searchUrl);
+
+        fetch(searchUrl)
+            .then((response) => {
+                return response.json();
+            })
+            .then((jsonResult) => {
+                // console.log(jsonResult.meals);
+                recipeApp.displayRecipe(jsonResult.meals);
+            });
+
+        const ulElement = document.querySelector('ul')
+        ulElement.innerHTML = "";
+    })
+    
+}
+
+
+// not sure where to place this function to let it run on every li that is displayed
+// recipeApp.categoryRecipe();
+
+
+
+// create a function to append fetched json data. (append to li that will reflect on DOM)
+recipeApp.displayRecipe = (event) => {
+
+    const recipeResult = document.querySelector('#results')
+    // const ingredientsList = document.querySelector('.ingredientsList')
+
+    event.forEach((recipe) => {
+        const divElement = document.createElement('div');
+        divElement.innerHTML = `
+            <h2>${recipe.strMeal}</h2>
+            <img src="${recipe.strMealThumb}" alt="">
+            <p>${recipe.strInstructions}</p>`
+            // <ul>
+            //     <li>${recipe.ingredient}</li>
+            // </ul>`
+        recipeResult.append(divElement);
+    })
+}
 
 // create a function to re-set
 
@@ -106,6 +189,8 @@ recipeApp.displayCategories = (event) => {
 
 recipeApp.init = function () {
     recipeApp.categoryOptions();
+    recipeApp.userRecipe();
+    
 }
 
 recipeApp.init();
