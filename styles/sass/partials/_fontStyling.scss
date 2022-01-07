@@ -1,38 +1,53 @@
-h1{
-    font-family: 'Yellowtail', cursive;
-    letter-spacing: .1em;
+h1 {
+    font-family: "Yellowtail", cursive;
+    font-size: 3rem;
+    letter-spacing: 0.1rem;
     text-align: center;
 
-    span{
+    // span{
+    //     text-decoration: underline;
+    // }
+
+    & span:last-child {
+        font-family: "Permanent Marker", cursive;
+        font-size: 5.5rem;
         text-decoration: underline;
     }
+}
 
-    & span:last-child{
-        font-family: 'Permanent Marker', cursive;
-        font-size: 2em;
+.forms,
+p {
+    font-family: "gadugi", sans-serif;
+    // font-size: 1em;
+}
+
+p {
+    color: $darkGrey;
+}
+
+button {
+    font-family: "Permanent Marker", cursive;
+    font-size: 1.3rem;
+}
+
+.dishOptions {
+    font-family: "gadugi", sans-serif;
+    text-decoration: none;
+    color: $black;
+    text-align: center;
+    font-size: 3rem;
+
+    li {
+        font-family: "Permanent Marker", cursive;
+        // text-align: center;
+        font-size: 1.6rem;
+        line-height: 2.5rem;
+        text-decoration: underline;
     }
 }
 
-
-.forms,
-li,
-p{
-    font-family: "gadugi", sans-serif;
-    font-size: 1em;
+h2 {
+    font-family: "Permanent Marker", cursive;
+    text-align: center;
+    font-size: 4rem;
 }
-
-
-p{
-    color:$darkGrey;
-}
-
-
-// Two buttons for "show me how to cook it" and "Show me a random dish"
-button{
-    font-family: 'Permanent Marker', cursive;
-    font-size: 1.3em;
-}
-
-
-
-
