@@ -51,7 +51,7 @@ recipeApp.getCategories = () => {
 
     categoryButton.addEventListener('click', function (event) {
         event.preventDefault();
-        // @@@@
+        
         const resultsClass = document.querySelector('#results')
         resultsClass.innerHTML = "";
 
@@ -99,7 +99,6 @@ recipeApp.displayCategories = (event) => {
 
 
 
-
 // Create a function to update the variable (userInput) based on user choice and input when the user chooses a dish by name
 recipeApp.userRecipe = () => {
     const dishButton = document.querySelector('#dishButton')
@@ -112,9 +111,9 @@ recipeApp.userRecipe = () => {
 
         const inputElement = document.querySelector(`input[type="text"]`)
         const userInput = inputElement.value
+
         // create an if statement to do nothing if the user hasn't inputted anything
         if (userInput) {
-            // console.log(userInput);
 
             const searchUrl = new URL(recipeApp.apiSearchUrl);
             searchUrl.search = new URLSearchParams({
@@ -129,7 +128,6 @@ recipeApp.userRecipe = () => {
                     recipeApp.displayRecipe(jsonResult.meals);
                 });
         };
-
     })
 }
 
@@ -138,28 +136,23 @@ recipeApp.userRecipe = () => {
 // Create a function to update the user's input based on the user's choice when the user chooses a dish by selecting from the list returned from the category
 recipeApp.categoryRecipe = () => {
     const aElement = document.querySelectorAll('li')
-    // console.log(aElement);
 
     aElement.forEach((e) => {
         e.addEventListener('click', function (event) {
             event.preventDefault();
 
-
             const userInput = e.textContent;
-            // console.log(userInput);
 
             const searchUrl = new URL(recipeApp.apiSearchUrl);
             searchUrl.search = new URLSearchParams({
                 s: `${userInput}`
             });
-            // console.log(searchUrl);
 
             fetch(searchUrl)
                 .then((response) => {
                     return response.json();
                 })
                 .then((jsonResult) => {
-                    // console.log(jsonResult.meals);
                     recipeApp.displayRecipe(jsonResult.meals);
                 });
 
@@ -185,7 +178,6 @@ recipeApp.randomRecipe = () => {
                 return response.json();
             })
             .then((jsonResult) => {
-                // console.log(jsonResult.meals);
                 recipeApp.displayRecipe(jsonResult.meals);
 
             });
@@ -200,8 +192,6 @@ recipeApp.randomRecipe = () => {
 recipeApp.displayRecipe = (event) => {
 
     const recipeResult = document.querySelector('#results')
-    // const ingredientsList = document.querySelector('.ingredientsList')
-
     event.forEach((recipe) => {
         const resultsClass = document.querySelector('#results')
         resultsClass.innerHTML = "";
@@ -211,25 +201,17 @@ recipeApp.displayRecipe = (event) => {
             <h2>${recipe.strMeal}</h2>
             <img src="${recipe.strMealThumb}" alt="">
             <p>${recipe.strInstructions}</p>`
-        // <ul>
-        //     <li>${recipe.ingredient1}</li>
-
-        // </ul>
         recipeResult.append(divElement);
     })
 }
 
-// create a function to re-set
-
-
 
 // create init function and add event listners to it
-
 recipeApp.init = function () {
     recipeApp.categoryOptions();
     recipeApp.userRecipe();
     recipeApp.randomRecipe();
-
 }
+
 
 recipeApp.init();
