@@ -300,6 +300,7 @@ body {
   background-image: url(./assets/backgroundOne.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   padding-top: 8%;
 }
 
@@ -434,7 +435,7 @@ form button:hover {
   width: 42.7%;
   margin: 0 30px;
   padding: 4% 0;
-  text-align: center;
+  text-align: right;
 }
 
 footer {
@@ -445,4 +446,86 @@ footer p {
   font-family: "gadugi", sans-serif;
   text-align: center;
   color: #585858;
+}
+
+.dishOptions li:hover,
+.dishOptions:focus {
+  cursor: pointer;
+  color: #585858;
+}
+
+@media (max-width: 690px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h1 span:last-child {
+    font-size: 4rem;
+  }
+
+  .searchByName::before {
+    display: none;
+  }
+
+  .searchByName {
+    margin-top: 10%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .searchByName input {
+    width: 88%;
+    margin-top: 3%;
+    margin-bottom: 6%;
+    text-align: center;
+  }
+
+  .greyLineContainer {
+    margin-top: 10%;
+    margin-bottom: 7%;
+  }
+
+  .searchByCategory {
+    margin-top: 10%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .searchByCategory select {
+    width: 100%;
+    margin-top: 3%;
+    margin-bottom: 6%;
+    text-align: center;
+  }
+
+  .randomButton::after {
+    display: none;
+  }
+
+  .results div h2 {
+    font-size: 3rem;
+    width: 90%;
+  }
+  .results div img {
+    width: 83%;
+  }
+  .results div p {
+    width: 90%;
+    text-align: left;
+  }
 }

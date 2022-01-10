@@ -2,6 +2,7 @@ body {
     background-image: url(./assets/backgroundOne.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     padding-top: 8%;
 }
 
@@ -131,7 +132,7 @@ form {
         width: 42.7%;
         margin: 0 30px;
         padding: 4% 0;
-        text-align: center;
+        text-align: right;
     }
 }
 
@@ -147,3 +148,13 @@ footer {
         color: $darkGrey;
     }
 }
+
+
+//change cursor visual on hover for .dishOptions
+.dishOptions li:hover,
+    .dishOptions:focus{
+        cursor: pointer;
+    color: $darkGrey;
+    
+    }
+    
