@@ -8,6 +8,8 @@ recipeApp = {};
 // save relevant API information
 recipeApp.apiListUrl = "https://www.themealdb.com/api/json/v1/1/list.php"
 recipeApp.apiSearchUrl = "https://www.themealdb.com/api/json/v1/1/search.php"
+recipeApp.apiRandomSearchUrl = "https://www.themealdb.com/api/json/v1/1/random.php"
+recipeApp.apiSearchByCategory = "https://www.themealdb.com/api/json/v1/1/filter.php"
 
 
 // make a list of options to choose from different categories
@@ -49,13 +51,16 @@ recipeApp.getCategories = () => {
 
     categoryButton.addEventListener('click', function (event) {
         event.preventDefault();
+        // @@@@
+        const resultsClass = document.querySelector('#results')
+        resultsClass.innerHTML = "";
 
         const select = document.querySelector('#categories');
         const categoryValue = select.options[select.selectedIndex].value;
 
-        const searchUrl = new URL(recipeApp.apiSearchUrl);
+        const searchUrl = new URL(recipeApp.apiSearchByCategory);
         searchUrl.search = new URLSearchParams({
-            s: `${categoryValue}`
+            c: `${categoryValue}`
         });
 
         fetch(searchUrl)
@@ -101,26 +106,29 @@ recipeApp.userRecipe = () => {
 
     dishButton.addEventListener('click', function (event) {
         event.preventDefault();
+
         const ulElement = document.querySelector('ul')
         ulElement.innerHTML = "";
 
         const inputElement = document.querySelector(`input[type="text"]`)
         const userInput = inputElement.value
-        // console.log(userInput);
-
-        const searchUrl = new URL(recipeApp.apiSearchUrl);
-        searchUrl.search = new URLSearchParams({
-            s: `${userInput}`
-        });
-
-        fetch(searchUrl)
-            .then((response) => {
-                return response.json();
-            })
-            .then((jsonResult) => {
-                recipeApp.displayRecipe(jsonResult.meals);
-            });
         // create an if statement to do nothing if the user hasn't inputted anything
+        if (userInput) {
+            // console.log(userInput);
+
+            const searchUrl = new URL(recipeApp.apiSearchUrl);
+            searchUrl.search = new URLSearchParams({
+                s: `${userInput}`
+            });
+
+            fetch(searchUrl)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((jsonResult) => {
+                    recipeApp.displayRecipe(jsonResult.meals);
+                });
+        };
 
     })
 }
@@ -132,13 +140,13 @@ recipeApp.categoryRecipe = () => {
     const aElement = document.querySelectorAll('li')
     // console.log(aElement);
 
-    aElement.forEach( (e) => {
+    aElement.forEach((e) => {
         e.addEventListener('click', function (event) {
             event.preventDefault();
 
 
             const userInput = e.textContent;
-            console.log(userInput);
+            // console.log(userInput);
 
             const searchUrl = new URL(recipeApp.apiSearchUrl);
             searchUrl.search = new URLSearchParams({
@@ -160,13 +168,32 @@ recipeApp.categoryRecipe = () => {
         })
     })
 
-    
-    
+
+
 }
 
 
 // create a function to fetch data for the random dish button
+recipeApp.randomRecipe = () => {
+    const randomButton = document.querySelector('#randomButton')
 
+    randomButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        fetch(recipeApp.apiRandomSearchUrl)
+            .then((response) => {
+                return response.json();
+            })
+            .then((jsonResult) => {
+                // console.log(jsonResult.meals);
+                recipeApp.displayRecipe(jsonResult.meals);
+
+            });
+
+        // create an if statement to do nothing if the user hasn't inputted anything
+
+    })
+}
 
 
 // create a function to append fetched json data. (append to li that will reflect on DOM)
@@ -178,16 +205,16 @@ recipeApp.displayRecipe = (event) => {
     event.forEach((recipe) => {
         const resultsClass = document.querySelector('#results')
         resultsClass.innerHTML = "";
-        
+
         const divElement = document.createElement('div');
         divElement.innerHTML = `
             <h2>${recipe.strMeal}</h2>
             <img src="${recipe.strMealThumb}" alt="">
             <p>${recipe.strInstructions}</p>`
-            // <ul>
-            //     <li>${recipe.ingredient1}</li>
-                
-            // </ul>
+        // <ul>
+        //     <li>${recipe.ingredient1}</li>
+
+        // </ul>
         recipeResult.append(divElement);
     })
 }
@@ -201,7 +228,8 @@ recipeApp.displayRecipe = (event) => {
 recipeApp.init = function () {
     recipeApp.categoryOptions();
     recipeApp.userRecipe();
-    
+    recipeApp.randomRecipe();
+
 }
 
 recipeApp.init();

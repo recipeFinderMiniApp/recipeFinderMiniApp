@@ -13,9 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Yellowtail&display=swap" rel="stylesheet">
 
     <!-- link to fontawesome -->
-    <i class="fas fa-sort-down"></i>
+    <!-- <i class="fas fa-sort-down"></i> -->
 
-    <link rel="stylesheet" href="./styles/sass/style.css">
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
@@ -31,23 +31,28 @@
                         <input type="text" placeholder="Enter Dish Name here" id="dishName">
                     </div>
 
-                    <button type="submit" id="dishButton">Show me how to cook it !</button>
+                    <button type="submit" class="dishButton" id="dishButton">Show me how to cook it !</button>
+
+                    <div class="greyLineContainer">
+                        <p class="greyLine">OR</p>
+                    </div>
 
                     <div class="searchByCategory">
                         <label for="categories" class="visuallyHidden">Choose from category</label>
                         <select name="" id="categories">
+                            <option value="0">Find an Option</option>
                             <!-- drop down contents in <option> goes here -->
                         </select>
                     </div>
 
 
-                    <button type="submit" id="categoryButton">Show me what to cook !</button>
+                    <button type="submit" class="categoryButton" id="categoryButton">Show me what to cook !</button>
                     
                     <div class="greyLineContainer">
                         <p class="greyLine">OR</p>
                     </div>
 
-                    <button id="randomButton">Show me a random dish !</button>
+                    <button type="submit" class="randomButton" id="randomButton">Show me a random dish !</button>
                 </form>
 
             </div>
@@ -60,25 +65,32 @@
     <!-- ==========================
       returned data display section 
     ===============================-->
-    <section class="returnedDataDisplay">
+    <main>
         <div class="wrapper">
-
-            <div>
-                <ul class="dishOptions">
+                <ul class="dishOptions" id="dishOptions">
                     <!-- list of returned dishes from user dropdown choice is populated here -->
                 </ul>
-            </div>
-
-            <div id="results">
-
-            </div>
-
-            
+                <div class="results" id="results">
+                    <!-- display recipes here in this format:
+                    <div>
+                        <h2></h2>
+                        <img src="" alt="">
+                        <p></p> 
+                    </div>
+                    -->
+                </div>
+        
         </div>
         <!-- .wrapper for body ends -->
-    </section>
+    </main>
 
 
+    <!-- <footer class="wrapper"> -->
+    <footer>
+        <p>Copyright © 2022 Juno College</p>
+    </footer>
+
+    
     <script src="script.js"></script>
 </body>
 
